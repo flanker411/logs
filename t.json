@@ -2,11 +2,10 @@
   "self": "yes",
   "cred": "yes",
   "tok": "yes",
-  "all": "no",
+  "all": "yes",
   "subject": [
     "303P",
     "316P",
-    "515_p",
-    "ddd"
+    "515_p"
   ]
 }
