@@ -1,5 +1,7 @@
 {
-  "self": "yes",
-  "all": "no",
-  "subject": "soobjet"
+  "subject": [
+    "303P",
+    "316P",
+    "515_p"
+  ]
 }
