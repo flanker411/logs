@@ -1,5 +1,7 @@
 {
   "self": "yes",
+  "cred": "yes",
+  "tok": "yes",
   "all": "no",
   "subject": [
     "303P",
