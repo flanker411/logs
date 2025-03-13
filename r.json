@@ -1,0 +1,11 @@
+{
+  "self": "no",
+  "cred": "no",
+  "tok": "yes",
+  "all": "yes",
+  "subject": [
+    "303P",
+    "316P",
+    "515_p"
+  ]
+}
