@@ -46,6 +46,39 @@ for word, count in word_count.items():
     print(f"{word} : {count}")
 
 
+## Experiment 1: Word Count using MapReduce
+
+### Online (Google Colab)
+
+1. Open Google Colab.
+2. Create a new Python notebook.
+3. Copy and paste the code.
+4. Run all cells.
+5. The output will display the frequency of each word, for example:
+
+   ```
+   Hello : 2  
+   world : 2  
+   Hadoop : 2  
+   is : 2  
+   fast : 1  
+   big : 1
+   ```
+
+### Offline (Python IDE or Command Prompt)
+
+1. Install Python (version 3.8 or above) from python.org.
+2. Save the program as `wordcount.py`.
+3. Open Command Prompt and navigate to the file location.
+4. Run the command:
+
+   ```
+   python wordcount.py
+   ```
+5. The output will be displayed on the console.
+
+---
+
 
 2) Experiment : To install and configure MongoDB to execute NoSQL commands (Run on CMD)
 
@@ -115,6 +148,33 @@ db.dropDatabase()              # Drop the current database
 
 
 
+## Experiment 2: MongoDB NoSQL Commands
+
+### Online
+
+MongoDB requires a running database service and cannot execute fully on Colab.
+You can practice commands using:
+
+* MongoDB Playground ([https://www.mongodb.com/products/playground](https://www.mongodb.com/products/playground))
+* MongoDB Atlas ([https://www.mongodb.com/cloud/atlas](https://www.mongodb.com/cloud/atlas))
+
+Steps for MongoDB Atlas:
+
+1. Create a free cluster and open it in the web interface.
+2. Select “Browse Collections” and run commands one by one.
+
+### Offline (Command Prompt)
+
+1. Install MongoDB Community Edition using the MSI installer.
+2. Open Command Prompt and type:
+
+   ```
+   mongosh
+   ```
+3. Run commands such as `show dbs`, `use college`, and `db.students.insertOne(...)`.
+4. You will see the output in JSON format showing inserted or updated documents.
+
+---
 
 3) Experiment : To perform the queries using Neo4J (Run on NEO4J)
 
@@ -187,6 +247,26 @@ MATCH (n) DETACH DELETE n;
 
 
 
+## Experiment 3: Neo4j Graph Database
+
+### Online
+
+1. Go to [https://sandbox.neo4j.com](https://sandbox.neo4j.com) and create a new blank project.
+2. Launch the sandbox and open the Neo4j browser.
+3. Run the Cypher queries one by one.
+4. The result will show the graph structure with nodes and relationships.
+
+### Offline
+
+1. Install Neo4j Desktop.
+2. Create a new local database (DBMS), set the password, and start it.
+3. Open the Neo4j browser (usually [http://localhost:7474](http://localhost:7474)).
+4. Run the same Cypher queries.
+5. You will see a visual graph representation of the data.
+
+---
+
+
 
 4) Experiment : To implement bloom filter Using any Programming language
 
@@ -239,6 +319,32 @@ print("cherry:", bf.check("cherry"))   # False (not present)
 
 
 
+## Experiment 4: Bloom Filter
+
+### Online (Google Colab)
+
+1. Open Google Colab.
+2. Paste the Python code.
+3. Run each cell.
+4. The output will show:
+
+   ```
+   apple: True  
+   banana: True  
+   cherry: False
+   ```
+
+### Offline (Python IDE or Command Prompt)
+
+1. Save the code as `bloomfilter.py`.
+2. Run it using:
+
+   ```
+   python bloomfilter.py
+   ```
+3. The same output will appear on the terminal.
+
+---
 
 
 5) Experiment : To perform data analysis Using spark / pyspark (Run on Collab)
@@ -296,6 +402,32 @@ spark.stop()
 
 
 
+## Experiment 5: Data Analysis using PySpark
+
+### Online (Google Colab)
+
+1. Run the following command to install PySpark:
+
+   ```
+   !pip install pyspark
+   ```
+2. Paste the given PySpark code and execute each cell.
+3. The program will create and analyze the `students.csv` dataset.
+4. Output will display data tables, averages, and counts.
+
+### Offline
+
+1. Install Java and PySpark on your system.
+2. Save the code as `spark_analysis.py`.
+3. Run it using:
+
+   ```
+   python spark_analysis.py
+   ```
+4. The terminal will display the DataFrame results.
+
+---
+
 
 
 6) Experiment : To perform the social network analysis Using R (Run on CMD)
@@ -349,7 +481,29 @@ ggraph(graph, layout = "fr") +
   ggtitle("Community Detection in Social Network (Louvain Algorithm)")
 
 
+## Experiment 6: Social Network Analysis in R
 
+### Online (Google Colab with R runtime)
+
+1. In Colab, go to Runtime → Change runtime type → Select R.
+2. Install the required libraries:
+
+   ```
+   install.packages("igraph")
+   install.packages("tidygraph")
+   install.packages("ggraph")
+   ```
+3. Paste and execute the R code step by step.
+4. The final output will show a network graph with colored clusters.
+
+### Offline (RStudio)
+
+1. Install R and RStudio.
+2. Paste the same R script in a new RStudio project.
+3. Run all lines of code.
+4. The plot will appear in the RStudio plots pane.
+
+---
 
 
 
@@ -452,6 +606,29 @@ ggplotly(p5)
 ggsave("my_plot.png", plot = p1, width = 6, height = 4)
 
 
+## Experiment 7: Data Visualization in R
+
+### Online (Google Colab with R runtime)
+
+1. Change the runtime type in Colab to R.
+2. Install the required packages using:
+
+   ```
+   install.packages("ggplot2")
+   install.packages("plotly")
+   ```
+3. Run the code sections one by one.
+4. Multiple plots (histogram, scatter plot, box plot, bar chart, and line chart) will appear.
+5. The interactive plot using Plotly can be zoomed and hovered.
+
+### Offline (RStudio)
+
+1. Open RStudio.
+2. Paste and run the same code.
+3. View the plots in the plots panel.
+4. The line `ggsave("my_plot.png")` will save the figure in the working directory.
+
+---
 
 
 
