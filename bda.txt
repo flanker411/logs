@@ -507,7 +507,7 @@ ggraph(graph, layout = "fr") +
 
 
 
-7) Experiment: To perform the DATA VISUALIZATION IN R
+7) Experiment : To perform the DATA VISUALIZATION IN R
 
 THOERY:
 Data visualization is the graphical representation of information and data. It helps in understanding trends, patterns, and insights that might not be easily noticeable in raw data. R is one of the most powerful tools for data visualization due to its rich collection of packages such as ggplot2 and plotly.
