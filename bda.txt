@@ -1,0 +1,462 @@
+1) Experiment : To implement a word count Program using MapReduce (Directly Run on Collab)
+
+THEORY: Word Count using MapReduce
+The Word Count program is the most basic example of the MapReduce concept — a powerful method used in Big Data to process large amounts of data in parallel.
+Input:
+We start with some text data (like a document or file).
+Map Phase:
+The text is divided into smaller parts (lines or words).
+Each word is paired with the number 1 — meaning that this word appeared once.
+Example: "Hello world" → [("Hello", 1), ("world", 1)]
+Shuffle and Sort Phase:
+All the pairs with the same word are grouped together.
+Example: all "Hello" pairs go into one group, all "world" pairs into another.
+Reduce Phase:
+For each group (word), we add up all the 1s to get the total count of that word.
+Example: "Hello" appears 2 times → ("Hello", 2)
+Output:
+The final output shows each word and how many times it appears in the text.
+In short:
+MapReduce breaks a big problem into smaller pieces (Map), groups similar data (Shuffle), and then combines results (Reduce).
+This method helps in analyzing very large datasets efficiently — just like counting words in millions of lines of text across many computers.
+
+CODE:
+#Word count 
+from collections import defaultdict
+# Input text
+text = """Hello world
+Hello Hadoop
+Hadoop is fast
+world is big"""
+# --- MAP PHASE ---
+mapped = []
+for line in text.split("\n"):
+    for word in line.split():
+        mapped.append((word, 1))
+# --- SHUFFLE & SORT PHASE ---
+shuffle = defaultdict(list)
+for word, count in mapped:
+    shuffle[word].append(count)
+# --- REDUCE PHASE ---
+word_count = {}
+for word, counts in shuffle.items():
+    word_count[word] = sum(counts)
+# --- OUTPUT ---
+for word, count in word_count.items():
+    print(f"{word} : {count}")
+
+
+
+2) Experiment : To install and configure MongoDB to execute NoSQL commands (Run on CMD)
+
+SETUP:
+
+1]Go to https://www.mongodb.com/try/download/community
+
+2]Choose:
+Version: Current or LTS
+Platform: Windows
+Package: MSI (Windows Installer)
+Click Download and once it finishes, open the installer.
+
+3]During installation:
+Choose Complete setup.
+Check “Install MongoDB as a Service” — this lets it run automatically in the background.
+Check “Install MongoDB Compass” (GUI tool – optional but useful).
+Click Next → Install.
+
+4]After installation:
+-Open Command Prompt and type: mongosh
+-You should see something like:
+Current Mongosh Log ID: ...
+test>
+-That means MongoDB is installed and running successfully 🎉
+If you get an error saying 'mongosh' is not recognized, restart your PC or add MongoDB to your PATH manually.
+
+5](optional)
+   -If MongoDB isn’t running automatically:
+   net start MongoDB
+   -To stop it later:
+    net stop MongoDB
+
+THEORY:Installing and Using MongoDB (NoSQL Database)
+MongoDB is a popular NoSQL database, which means it stores data in a flexible, JSON-like format instead of traditional tables and rows like SQL databases.
+It is mainly used for applications that need high performance, scalability, and flexible data storage.
+🔹 Basic NoSQL Commands (Queries):
+Command	Description
+show dbs	//Lists all databases.
+use college	//Creates or switches to a database named college.
+db.createCollection("students") //Creates a collection (like a table).
+db.students.insertOne({name:"BOB", age:21, course:"BDA"})	//Inserts one record/document.
+db.students.find()	//Displays all documents in the students collection.
+db.students.updateOne({name:"BOB"}, {$set:{age:21}})	//Updates a document.
+db.students.deleteOne({name:"BOB"})	//Deletes a specific document.
+db.dropDatabase()	//Deletes the current database.
+🔹 Theory in Simple Words:
+MongoDB stores data in the form of documents (similar to JSON objects).
+Each document can have different fields — this makes MongoDB very flexible and easy to scale.
+It is widely used in Big Data, web apps, and real-time analytics because it can handle large amounts of unstructured data very efficiently.
+In short:
+MongoDB = Fast, Flexible, and Easy-to-Use NoSQL Database for Modern Applications.
+
+
+CODE:
+
+QURIES:
+
+show dbs                      # Show all databases
+use college                   # Create or switch to a database
+db.createCollection("students")  # Create collection (like table)
+db.students.insertOne({name:"BOB", age:21, course:"BDA"})  # Insert data
+db.students.find()             # Show all data
+db.students.updateOne({name:"BOB"}, {$set:{age:21}})  # Update data
+db.students.deleteOne({name:"BOB"})  # Delete data
+db.dropDatabase()              # Drop the current database
+
+
+
+
+3) Experiment : To perform the queries using Neo4J (Run on NEO4J)
+
+SETUP:
+Step 1: Install Neo4j on Windows
+Go to https://neo4j.com/download-center/
+Download Neo4j Desktop (Community Edition) for Windows.
+Install it → follow the wizard → open Neo4j Desktop.
+Click “New Project” → “Add Database” → Create a local DBMS.
+Give it a name (e.g., MyGraphDB)
+Set a password (e.g., 1234)
+Click Start to run it.
+
+Step 2: Open Neo4j Browser
+Once the database is running, click “Open” (Neo4j Browser).
+It will open a window (usually http://localhost:7474/).
+Login using:
+Username: neo4j
+Password: 1234  (or your set password)
+
+THEORY:
+Neo4j is a NoSQL graph database that stores data in the form of nodes and relationships instead of traditional tables. It is mainly used to represent and analyze connected data, such as social networks, recommendations, or communication networks.
+In Neo4j, each node represents an entity like a person, place, or object, and each relationship shows how two nodes are connected, such as FRIEND_OF, WORKS_WITH, or KNOWS. Both nodes and relationships can have properties that store details like name, age, or type.
+Neo4j uses a query language called Cypher, which is designed for working with graph data. It is similar to SQL but uses a more visual, pattern-based syntax. The CREATE command is used to add new nodes or relationships, while MATCH is used to find and display existing data. The SET command updates node properties, and DELETE or DETACH DELETE removes data from the graph.
+By running these queries, users can easily build and explore data connections. For example, you can create people as nodes and define how they are connected through friendships or work relations. Neo4j allows you to visualize these links, making it much easier to understand complex relationships.
+Neo4j is very efficient for traversing and analyzing connected data. It is widely used in applications like social network analysis, fraud detection, recommendation systems, and knowledge graphs.
+In conclusion, Neo4j helps in storing and querying highly connected data effectively using Cypher queries, making it a powerful tool for graph-based data management and visualization.
+
+CODE:
+Step 3: Queries (Run One by One)
+// ===== CREATE NODES =====
+CREATE (a:Person {name:'Alice', age:25});
+CREATE (b:Person {name:'Bob', age:30});
+CREATE (c:Person {name:'Charlie', age:28});
+CREATE (d:Person {name:'David', age:26});
+
+// ===== CREATE RELATIONSHIPS =====
+MATCH (a:Person {name:'Alice'}), (b:Person {name:'Bob'})
+CREATE (a)-[:FRIEND_OF]->(b);
+
+MATCH (a:Person {name:'Alice'}), (c:Person {name:'Charlie'})
+CREATE (a)-[:WORKS_WITH]->(c);
+
+MATCH (b:Person {name:'Bob'}), (d:Person {name:'David'})
+CREATE (b)-[:KNOWS]->(d);
+
+// ===== DISPLAY ALL NODES & RELATIONSHIPS =====
+MATCH (n) RETURN n;
+MATCH (a)-[r]->(b) RETURN a, r, b;
+
+// ===== FILTERING =====
+MATCH (p:Person {name:'Alice'}) RETURN p;
+MATCH (a:Person {name:'Alice'})-[:FRIEND_OF]->(friends) RETURN friends;
+
+// ===== UPDATE NODE PROPERTY =====
+MATCH (p:Person {name:'David'})
+SET p.age = 27
+RETURN p;
+
+// ===== DELETE A RELATIONSHIP =====
+MATCH (a:Person {name:'Alice'})-[r:WORKS_WITH]->(c:Person {name:'Charlie'})
+DELETE r;
+
+// ===== DELETE ONE NODE =====
+MATCH (p:Person {name:'Charlie'}) DETACH DELETE p;
+
+// ===== DELETE ALL NODES AND RELATIONSHIPS (cleanup) =====
+MATCH (n) DETACH DELETE n;
+
+
+
+
+
+4) Experiment : To implement bloom filter Using any Programming language
+
+THEORY:
+A Bloom Filter is a probabilistic data structure used to test whether an element is possibly in a set or definitely not in a set. It is very efficient in terms of space and time, which makes it suitable for applications where fast lookups are required and a small probability of false positives is acceptable.
+A Bloom Filter uses a bit array of fixed size and a set of hash functions. When an item is added, it is hashed using multiple hash functions, and the resulting positions in the bit array are set to 1. To check if an item exists, the same hash functions are used again — if all the corresponding bits are 1, the item is possibly present; if any bit is 0, the item is definitely not present.
+The advantage of Bloom Filters is that they require very little memory and provide fast membership checking. However, they can return false positives (reporting an element exists when it doesn’t), but never false negatives.
+Bloom Filters are widely used in applications such as databases, network security, spam detection, cache filtering, and search engines.
+In this experiment, we implemented a simple Bloom Filter in Python using the hashlib library. Multiple hash values are generated for each element, and their corresponding bits are set in a bit array. This demonstrates the basic working of Bloom Filters in checking membership efficiently.
+
+CODE:
+import hashlib
+
+class BloomFilter:
+    def __init__(self, size=1000, hash_count=3):
+        self.size = size
+        self.hash_count = hash_count
+        self.bit_array = [0] * size
+
+    def _hashes(self, item):
+        """Generate multiple hash values for the same item"""
+        hashes = []
+        for i in range(self.hash_count):
+            hash_val = int(hashlib.md5((item + str(i)).encode()).hexdigest(), 16)
+            hashes.append(hash_val % self.size)
+        return hashes
+
+    def add(self, item):
+        """Add an item to the Bloom filter"""
+        for hash_val in self._hashes(item):
+            self.bit_array[hash_val] = 1
+
+    def check(self, item):
+        """Check if an item is possibly in the set"""
+        return all(self.bit_array[hash_val] == 1 for hash_val in self._hashes(item))
+
+
+# ===== MAIN PROGRAM =====
+bf = BloomFilter(size=20, hash_count=3)
+
+# Add elements
+bf.add("apple")
+bf.add("banana")
+bf.add("grape")
+
+# Check membership
+print("apple:", bf.check("apple"))     # True (present)
+print("banana:", bf.check("banana"))   # True (present)
+print("cherry:", bf.check("cherry"))   # False (not present)
+
+
+
+
+
+5) Experiment : To perform data analysis Using spark / pyspark (Run on Collab)
+
+THEORY:
+Apache Spark is an open-source, distributed computing framework designed for fast and large-scale data processing. It provides high-level APIs in Python, Java, Scala, and R for building big data applications. PySpark is the Python API for Spark, allowing Python developers to harness the power of Spark’s parallel computing capabilities easily.
+In this experiment, data analysis is performed using PySpark on a sample dataset of students. The data is stored in a CSV file containing information such as Name, Department, and Marks. Using the SparkSession, the dataset is read into a DataFrame, which is similar to a table in relational databases.
+Various analytical operations are performed, such as displaying data, filtering students based on marks, selecting specific columns, grouping data by department, and finding average, maximum, and minimum marks. Aggregate functions like avg(), max(), min(), and count() are used to extract meaningful insights from the dataset.
+This experiment demonstrates the efficiency of PySpark in handling structured data for analysis. It provides scalability, fault tolerance, and high performance, making it ideal for big data analytics, machine learning, and real-time data process
+
+code: 
+Run One by one
+!pip install pyspark
+
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import avg, max, min, count
+
+# Create Spark Session
+spark = SparkSession.builder.appName("StudentDataAnalysis").getOrCreate()
+
+# Create CSV
+%%writefile students.csv
+Name,Department,Marks
+Rahul,CS,85
+Sneha,IT,90
+Amit,CS,78
+Priya,IT,88
+Raj,EXTC,82
+
+# Read data
+df = spark.read.csv("students.csv", header=True, inferSchema=True)
+df.show()
+
+# Schema
+df.printSchema()
+
+# Select columns
+df.select("Name", "Marks").show()
+
+# Filter
+df.filter(df.Marks > 85).show()
+
+# Group and average
+df.groupBy("Department").agg(avg("Marks").alias("AverageMarks")).show()
+
+# Max & Min
+df.select(max("Marks").alias("Highest"), min("Marks").alias("Lowest")).show()
+
+# Count students
+df.agg(count("Name").alias("TotalStudents")).show()
+
+spark.stop()
+
+
+
+
+
+
+
+6) Experiment : To perform the social network analysis Using R (Run on CMD)
+
+Note : In Google Collab Change the Python 3 to R , Go to the runtime and go to change runtime type instead of using Python 3 Select the R 
+
+THEORY:
+Social Network Analysis (SNA) is a technique used to study the relationships and interactions between individuals, organizations, or entities represented as nodes and edges in a network. It helps identify patterns, influential members, and communities within a network structure.
+In this experiment, we use R programming with the libraries igraph, tidygraph, and ggraph to perform social network analysis. The dataset contains pairs of connected nodes (edges), which are used to create an undirected graph representing relationships between individuals.
+We use the Louvain Community Detection algorithm to identify groups or clusters of nodes that are more connected to each other than to the rest of the network. Additionally, centrality measures such as degree, betweenness, and closeness are calculated to determine the most influential or central nodes in the network.
+Finally, the network is visualized using ggraph, where nodes are colored based on their community and sized according to their degree centrality. This visualization helps in understanding how people or entities are connected and which ones play a key role in the communication structure.
+This experiment demonstrates how R can be effectively used for network visualization, community detection, and influence analysis, which are important in fields like social media analysis, organizational studies, and data mining.
+
+
+Code:(One By One)
+install.packages("igraph")
+install.packages("tidygraph")
+install.packages("ggraph")
+
+library(igraph)
+library(tidygraph)
+library(ggraph)
+
+# Create edges
+edges <- data.frame(
+  from = c("A","A","A","B","B","C","D","E","F","G","H","I","J","K"),
+  to   = c("B","C","D","E","F","G","H","I","J","K","A","B","C","D")
+)
+
+# Convert to undirected graph
+graph <- as_tbl_graph(edges, directed = FALSE)
+
+# Detect communities
+graph <- graph %>%
+  mutate(community = as.factor(group_louvain()))
+
+# Centrality measures
+graph <- graph %>%
+  mutate(
+    degree = centrality_degree(),
+    betweenness = centrality_betweenness(),
+    closeness = centrality_closeness()
+  )
+
+# Visualize
+ggraph(graph, layout = "fr") +
+  geom_edge_link(alpha = 0.3, color = "gray") +
+  geom_node_point(aes(color = community, size = degree)) +
+  geom_node_text(aes(label = name), repel = TRUE, size = 4) +
+  theme_void() +
+  ggtitle("Community Detection in Social Network (Louvain Algorithm)")
+
+
+
+
+
+
+7) Experiment: To perform the DATA VISUALIZATION IN R
+
+THOERY:
+Data visualization is the graphical representation of information and data. It helps in understanding trends, patterns, and insights that might not be easily noticeable in raw data. R is one of the most powerful tools for data visualization due to its rich collection of packages such as ggplot2 and plotly.
+In this experiment, we use both base R plotting functions and advanced visualization libraries to analyze the built-in dataset mtcars. Basic plots such as histograms, boxplots, and scatter plots are created to explore the relationships between different variables like mileage (mpg), weight, and the number of cylinders.
+The ggplot2 package is used to create aesthetically appealing and customizable plots such as bar charts, box plots, scatter plots, and line charts. Each visualization helps interpret different aspects of the dataset — for example, the relationship between car weight and fuel efficiency or the distribution of cars by the number of cylinders.
+For interactive visualization, the plotly package is used, which allows users to interact with data points through zooming, hovering, and highlighting. Finally, plots can be saved as image files using the ggsave() function.
+This experiment demonstrates how R makes data visualization simple, flexible, and powerful, enabling users to gain valuable insights and communicate data-driven results effectively.
+
+CODE:(One By One)
+# Step 1: Install and load packages
+install.packages("ggplot2")
+install.packages("plotly")
+
+library(ggplot2)
+library(plotly)
+
+# Step 2: Load sample dataset
+data(mtcars)
+head(mtcars)
+
+# Step 3: ---- Basic Plots (Base R) ----
+
+# Histogram
+hist(mtcars$mpg,
+     main = "Car Mileage Distribution",
+     xlab = "Miles per Gallon (MPG)",
+     col = "skyblue",
+     border = "white")
+
+# Boxplot
+boxplot(mpg ~ cyl, data = mtcars,
+        main = "MPG by Number of Cylinders",
+        xlab = "Cylinders",
+        ylab = "Miles per Gallon",
+        col = "lightgreen")
+
+# Scatter Plot
+plot(mtcars$wt, mtcars$mpg,
+     main = "Weight vs MPG",
+     xlab = "Car Weight (1000 lbs)",
+     ylab = "Miles per Gallon",
+     col = "red",
+     pch = 19)
+
+# Step 4: ---- Advanced Plots (ggplot2) ----
+
+# Scatter Plot
+p1 <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point(color = "blue", size = 3) +
+  ggtitle("Scatter Plot: Weight vs MPG") +
+  xlab("Car Weight (1000 lbs)") +
+  ylab("Miles per Gallon") +
+  theme_minimal()
+
+print(p1)
+
+# Bar Chart
+p2 <- ggplot(mtcars, aes(x = factor(cyl))) +
+  geom_bar(fill = "orange") +
+  ggtitle("Count of Cars by Cylinders") +
+  xlab("Cylinders") +
+  ylab("Number of Cars") +
+  theme_light()
+
+print(p2)
+
+# Box Plot
+p3 <- ggplot(mtcars, aes(x = factor(cyl), y = mpg, fill = factor(cyl))) +
+  geom_boxplot() +
+  ggtitle("MPG by Cylinder Type") +
+  xlab("Cylinders") +
+  ylab("Miles per Gallon") +
+  theme_bw()
+
+print(p3)
+
+# Line Chart
+p4 <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_line(color = "purple") +
+  ggtitle("Line Chart: Weight vs MPG") +
+  theme_classic()
+
+print(p4)
+
+# Step 5: ---- Interactive Plot (Plotly) ----
+
+p5 <- ggplot(mtcars, aes(x = wt, y = mpg, color = factor(cyl))) +
+  geom_point(size = 3) +
+  ggtitle("Interactive Plot: Weight vs MPG by Cylinders") +
+  theme_minimal()
+
+# Convert ggplot to interactive plot
+ggplotly(p5)
+
+# Step 6: ---- Save Plot ----
+ggsave("my_plot.png", plot = p1, width = 6, height = 4)
+
+
+
+
+
+
+
+
+
+
