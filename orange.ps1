@@ -5,7 +5,7 @@
 
 # CONFIGURATION - CHANGE THESE!
 $Red7zUrl = "https://github.com/YOUR_USERNAME/miner-test/releases/download/v1.0.0/red.7z"  # YOUR URL HERE
-$DecryptionPassword = "TestPassword123!"  # MUST match what you used for grey.7z
+$DecryptionPassword = "red!"  # MUST match what you used for grey.7z
 
 # Test service names (use obvious names for testing)
 $ServiceNameXMRig = "TestMinerService"
